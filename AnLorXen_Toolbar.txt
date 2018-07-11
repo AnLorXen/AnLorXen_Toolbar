@@ -1,0 +1,11 @@
+
+##
+## Title: AnLorXen_Toolbar
+## APIVersion: 100023
+## Author: AnLorXen
+## SavedVariables: AlxBarVars
+##
+
+AnLorXen_Toolbar.lua
+Bindings.xml
+
