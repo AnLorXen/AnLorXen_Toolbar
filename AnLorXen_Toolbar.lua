@@ -31,7 +31,8 @@ AlxBar.sys = {
     test   = "/test"
   }, 
 
-  timerId = "AnLorXen_Timer" 
+  timerId1K = "AnLorXen_Timer1K", 
+  timerId3K = "AnLorXen_Timer3K" 
 } 
 
 AlxBar.cfg = { 
@@ -685,8 +686,6 @@ AlxBar.InventoryUpdated = function(_event, _bagId, _slotId, _isNew, _itemSoundCa
   AlxBar.UpdateBagSpace() 
 end 
 
-
-
   -- INVENTORY_UPDATE_REASON_DEFAULT = 0 
   -- INVENTORY_UPDATE_REASON_DURABILITY_CHANGE = 1 
   -- INVENTORY_UPDATE_REASON_ITEM_CHARGE = 3 
@@ -711,11 +710,17 @@ end
   -- )
 
 
-AlxBar.TimerChanged = function() 
+
+AlxBar.Timer1KChanged = function() 
   AlxBar.UpdateTime() 
   AlxBar.UpdateFpsAndPing() 
   AlxBar.UpdateCounter() 
 end
+
+AlxBar.Timer3KChanged = function() 
+  AlxBar.UpdateRepairCost() 
+  AlxBar.UpdateWeaponCharge() 
+end 
 
 
 
@@ -800,7 +805,10 @@ EVENT_MANAGER:RegisterForEvent(
 ) 
 
 EVENT_MANAGER:RegisterForUpdate(
-  AlxBar.sys.timerId, 1000, AlxBar.TimerChanged
+  AlxBar.sys.timerId1K, 1000, AlxBar.Timer1KChanged
+)
+EVENT_MANAGER:RegisterForUpdate(
+  AlxBar.sys.timerId3K, 3000, AlxBar.Timer3KChanged
 )
 
 
