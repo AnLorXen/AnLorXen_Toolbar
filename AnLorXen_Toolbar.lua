@@ -710,6 +710,12 @@ end
   -- )
 
 
+  
+AlxBar.AbilityUsed = function(_evt, _slot) 
+  d("Ability used: " .. _slot) 
+end 
+
+
 
 AlxBar.Timer1KChanged = function() 
   AlxBar.UpdateTime() 
@@ -732,6 +738,24 @@ AlxBar.CombatStateChanged = function(_evt, _bool)
     AlxBar.UpdateWeaponCharge() 
   end 
 end 
+
+
+
+AlxBar.UnitDestoyed = function(_evt, _unit) 
+  d("UnitDestoyed: " .. _unit) 
+end 
+
+
+
+AlxBar.FinesseRankChanged = function(_evt, _unitTag, _rankNum, _name, _xpBonus, _loot) 
+  d("FinesseRankChanged:") 
+  d("UnitTag: " .. _unitTag) 
+  d("RankNumber: " .. _rankNum) 
+  d("Name: " .. _name) 
+  d("XP_Bonus: " .. _xpBonus) 
+  d("Loot: " .. tostring(_loot)) 
+end 
+
 
 
 
@@ -801,7 +825,19 @@ EVENT_MANAGER:RegisterForEvent(
 ) 
 
 EVENT_MANAGER:RegisterForEvent(
+  AlxBar.sys.name,  EVENT_ACTION_SLOT_ABILITY_USED, AlxBar.AbilityUsed 
+) 
+
+EVENT_MANAGER:RegisterForEvent(
   AlxBar.sys.name, EVENT_PLAYER_COMBAT_STATE, AlxBar.CombatStateChanged
+) 
+
+EVENT_MANAGER:RegisterForEvent(
+  AlxBar.sys.name, EVENT_UNIT_DESTROYED, AlxBar.UnitDestoyed
+) 
+
+EVENT_MANAGER:RegisterForEvent(
+  AlxBar.sys.name, EVENT_FINESSE_RANK_CHANGED, AlxBar.FinesseRankChanged 
 ) 
 
 EVENT_MANAGER:RegisterForUpdate(
